@@ -1,0 +1,93 @@
+/* PrimeNG 17 */
+@import 'primeng/resources/themes/lara-light-blue/theme.css';
+@import 'primeng/resources/primeng.css';
+@import 'primeicons/primeicons.css';
+@import 'primeflex/primeflex.css';
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: var(--font-family);
+}
+
+/* ===== Layout de página (lista e cadastro) ===== */
+.page-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 32px;
+  background: #FAFAFA;
+  border-bottom: 1px solid #E2E8F0;
+
+  // `.page-header .page-header__title` para vencer o peso 600 do .t-title-lg (styles.css carrega depois)
+  & &__title {
+    margin: 0;
+    font-weight: 500;
+    color: #1F2937;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+  }
+}
+
+.page-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 32px 24px;
+}
+
+@media (max-width: 700px) {
+  .page-header,
+  .page-content {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* ===== Modal de confirmação de saída (cadastro): sem título, só a mensagem e as ações ===== */
+.p-confirm-dialog.leave-dialog .p-dialog-header { display: none; }
+.p-confirm-dialog.leave-dialog .p-dialog-content { padding-top: 24px; border-top-left-radius: 6px; border-top-right-radius: 6px; }
+
+/* ===== Listas de cards (filiais, almoxarifados) ===== */
+.list-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* skeleton do paginador durante o carregamento: um bloco só, no lugar do paginador */
+.skeleton.skeleton-paginator {
+  align-self: flex-end;
+  width: 300px;
+  max-width: 100%;
+  height: 32px;
+  margin: 4px 0;
+  border-radius: 16px;
+}
+
+/* estado vazio/erro que ocupa o espaço restante e fica centralizado */
+.state-fill { flex: 1; }
+.req-empty > .pi { font-size: 18px; }
+
+/* alerta de erro geral em formulários */
+.form-alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid #FECACA;
+  border-radius: 6px;
+  background: #FEF2F2;
+  color: #B91C1C;
+  font: var(--secondary-md);
+}

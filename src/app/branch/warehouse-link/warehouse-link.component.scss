@@ -1,0 +1,27 @@
+// O painel usa .insumo-layer do styles.css (fundo cinza, borda, cantos); aqui só cabeçalho e ferramentas.
+:host {
+  display: block;
+}
+
+.link-panel__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.link-panel__title {
+  margin: 0;
+  color: #1F2937;
+}
+
+.link-panel__actions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.link-panel__tools {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}

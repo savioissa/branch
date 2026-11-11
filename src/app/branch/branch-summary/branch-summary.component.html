@@ -1,0 +1,19 @@
+@if (loading || !branch) {
+  <div class="skeleton summary-skeleton" aria-hidden="true"></div>
+} @else {
+  <aside class="summary" aria-label="Resumo da filial">
+    <span class="summary__overline">Filial</span>
+    <h1 class="summary__title">{{ branch.descricao }}</h1>
+
+    <dl class="summary__list">
+      <div class="kv">
+        <dt class="kv-k summary__k">Código</dt>
+        <dd class="summary__v">{{ branch.codigo }}</dd>
+      </div>
+      <div class="kv">
+        <dt class="kv-k summary__k">Descrição</dt>
+        <dd class="summary__v">{{ branch.descricao }}</dd>
+      </div>
+    </dl>
+  </aside>
+}

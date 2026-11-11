@@ -1,0 +1,65 @@
+// Campos usam .ui-input do styles.css; aqui o grid, rótulos, erro e o modo de leitura (desabilitado).
+:host {
+  display: block;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+
+  &__label {
+    color: #1F2937;
+  }
+
+  &__required {
+    color: #DC2626;
+    margin-left: 2px;
+  }
+
+  &__input {
+    box-shadow: 0 1px 2px rgba(16, 24, 40, .06);
+
+    // modo de leitura: fundo cinza e texto apagado, sem a opacidade padrão do PrimeNG
+    &:disabled {
+      opacity: 1;
+      background: #EDEEF0;
+      border-color: #D9DCE1;
+      color: #9CA3AF;
+      box-shadow: none;
+    }
+
+    &--invalid,
+    &--invalid:focus {
+      border-color: #DC2626;
+    }
+
+    &--invalid:focus {
+      outline-color: #DC262655;
+    }
+  }
+
+  &__error {
+    font: var(--secondary-sm);
+    color: #DC2626;
+  }
+}
+
+// carregando: rótulo (20px) + espaço (6px) + input (40px) num bloco só
+.field-skeleton {
+  height: 66px;
+  border-radius: 6px;
+}
+
+@media (max-width: 700px) {
+  .form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

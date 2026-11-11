@@ -1,0 +1,19 @@
+// Lista, estados e painéis vêm do styles.scss / styles.css; aqui só o fluxo vertical da aba.
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 100%;
+}
+
+.tab-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+// o vazio fica centralizado na área visível da aba
+.req-empty.state-fill {
+  min-height: 320px;
+}

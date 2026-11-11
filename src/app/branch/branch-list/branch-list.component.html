@@ -1,0 +1,89 @@
+<header class="page-header">
+  <h1 class="t-title-lg page-header__title">Filial</h1>
+
+  <div class="page-header__actions">
+    <p-button label="Novo" icon="pi pi-plus" styleClass="btn--md btn--secondary header-btn" (onClick)="novo()" />
+
+    <p-button
+      [class.is-active]="showFilter"
+      icon="pi pi-filter"
+      ariaLabel="Filtrar"
+      styleClass="btn--md btn--neutral header-btn"
+      (onClick)="showFilter = !showFilter"
+    />
+
+    <p-button
+      [class.is-active]="showSort"
+      icon="pi pi-sort-amount-down"
+      ariaLabel="Ordenar"
+      styleClass="btn--md btn--neutral header-btn"
+      (onClick)="showSort = !showSort"
+    />
+
+    <p-button
+      label="Atualizar"
+      icon="pi pi-refresh"
+      styleClass="btn--md btn--primary header-btn"
+      [disabled]="status === 'loading'"
+      (onClick)="carregar()"
+    />
+  </div>
+</header>
+
+<main class="page-content">
+  @if (showFilter) {
+    <app-branch-filter [filter]="filtro" (filterChange)="onFilterChange($event)" />
+  }
+
+  @if (showSort) {
+    <app-branch-sort [sort]="ordenacao" (sortChange)="onSortChange($event)" />
+  }
+
+  @switch (status) {
+    @case ('loading') {
+      <div class="list-stack" aria-busy="true" aria-label="Carregando filiais">
+        @for (s of skeletons; track $index) {
+          <app-branch-card [loading]="true" />
+        }
+      </div>
+      <div class="skeleton skeleton-paginator" aria-hidden="true"></div>
+    }
+
+    @case ('error') {
+      <div class="load-state load-state--error state-fill">
+        <i class="pi pi-exclamation-circle"></i>
+        <p>Não foi possível carregar as filiais</p>
+        <p-button label="Tentar novamente" icon="pi pi-refresh" styleClass="btn--md btn--secondary" (onClick)="carregar()" />
+      </div>
+    }
+
+    @default {
+      @if (resultado.length) {
+        <div class="list-stack">
+          @for (branch of pagina; track branch.codigo) {
+            <app-branch-card [branch]="branch" (open)="abrir($event)" />
+          }
+        </div>
+
+        <p-paginator
+          [first]="first"
+          [rows]="rows"
+          [totalRecords]="resultado.length"
+          [pageLinkSize]="5"
+          styleClass="paginator--md"
+          (onPageChange)="onPage($event)"
+        />
+      } @else if (branches.length && filtroAtivo) {
+        <div class="req-empty state-fill">
+          <i class="pi pi-search"></i>
+          <p>Nenhum resultado encontrado</p>
+        </div>
+      } @else {
+        <div class="req-empty state-fill">
+          <i class="pi pi-folder-open"></i>
+          <p>Nenhuma filial cadastrada</p>
+        </div>
+      }
+    }
+  }
+</main>

@@ -1,0 +1,22 @@
+// O visual do card vem do styles.css global (.reg-card, .kv, .skeleton); aqui só as colunas e o skeleton.
+:host {
+  display: block;
+}
+
+.branch-card {
+  grid-template-columns: 290px minmax(0, 1fr) auto;
+  min-height: 60px;
+  padding: 8px 12px 8px 22px;
+}
+
+// carregando: o card inteiro vira um bloco, com a mesma altura e cantos do card real
+.card-skeleton {
+  height: 60px;
+  border-radius: 10px;
+}
+
+@media (max-width: 700px) {
+  .branch-card {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  }
+}

@@ -1,0 +1,21 @@
+@if (loading || !branch) {
+  <div class="skeleton card-skeleton" aria-hidden="true"></div>
+} @else {
+  <article class="reg-card branch-card">
+    <div class="kv">
+      <span class="kv-k">Código</span>
+      <span class="kv-v" [title]="branch.codigo">{{ branch.codigo }}</span>
+    </div>
+    <div class="kv">
+      <span class="kv-k">Descrição</span>
+      <span class="kv-v" [title]="branch.descricao">{{ branch.descricao }}</span>
+    </div>
+    <p-button
+      icon="pi pi-external-link"
+      [text]="true"
+      ariaLabel="Abrir filial {{ branch.descricao }}"
+      styleClass="btn--md btn--text icon-neutral"
+      (onClick)="open.emit(branch)"
+    />
+  </article>
+}

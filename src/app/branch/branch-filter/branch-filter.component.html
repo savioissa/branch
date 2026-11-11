@@ -1,0 +1,45 @@
+<section class="filter-panel filter-panel--cols-2" aria-label="Filtros">
+  <div class="filter-panel__field">
+    <label class="filter-panel__label" for="branch-filter-codigo">Código</label>
+    <div class="filter-panel__control">
+      <p-dropdown
+        [options]="operadores"
+        [ngModel]="filter.codigo.operador"
+        (ngModelChange)="update('codigo', { operador: $event })"
+        placeholder="Operador"
+        appendTo="body"
+        styleClass="filter-panel__operator"
+        panelStyleClass="filter-panel__operator-panel"
+      />
+      <input
+        id="branch-filter-codigo"
+        pInputText
+        class="filter-panel__input"
+        [ngModel]="filter.codigo.valor"
+        (ngModelChange)="update('codigo', { valor: $event })"
+      />
+    </div>
+  </div>
+
+  <div class="filter-panel__field">
+    <label class="filter-panel__label" for="branch-filter-descricao">Descrição</label>
+    <div class="filter-panel__control">
+      <p-dropdown
+        [options]="operadores"
+        [ngModel]="filter.descricao.operador"
+        (ngModelChange)="update('descricao', { operador: $event })"
+        placeholder="Operador"
+        appendTo="body"
+        styleClass="filter-panel__operator"
+        panelStyleClass="filter-panel__operator-panel"
+      />
+      <input
+        id="branch-filter-descricao"
+        pInputText
+        class="filter-panel__input"
+        [ngModel]="filter.descricao.valor"
+        (ngModelChange)="update('descricao', { valor: $event })"
+      />
+    </div>
+  </div>
+</section>

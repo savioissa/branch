@@ -1,0 +1,24 @@
+<section class="sort-panel" aria-label="Ordenação">
+  <span class="sort-panel__label">Ordenar por</span>
+  <div class="sort-panel__control">
+    <div class="sort-panel__field">
+      <p-dropdown
+        [options]="campos"
+        [ngModel]="sort.campo"
+        (ngModelChange)="setCampo($event)"
+        placeholder="Selecione"
+        [showClear]="true"
+        appendTo="body"
+        styleClass="sort-panel__select"
+        panelStyleClass="sort-panel__select-panel"
+      />
+    </div>
+    <p-button
+      [icon]="sort.direcao === 'asc' ? 'pi pi-sort-amount-up-alt' : 'pi pi-sort-amount-down'"
+      [ariaLabel]="sort.direcao === 'asc' ? 'Crescente' : 'Decrescente'"
+      styleClass="btn--md btn--neutral"
+      [disabled]="!sort.campo"
+      (onClick)="inverterDirecao()"
+    />
+  </div>
+</section>

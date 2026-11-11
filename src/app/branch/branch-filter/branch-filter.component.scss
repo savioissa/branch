@@ -1,0 +1,15 @@
+// O visual do painel vem do styles.css global (.filter-panel*).
+:host {
+  display: block;
+}
+
+// Filtro da filial: dois campos dividindo a largura
+.filter-panel--cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 700px) {
+  .filter-panel--cols-2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

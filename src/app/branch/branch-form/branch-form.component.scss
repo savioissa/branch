@@ -1,0 +1,10 @@
+// Cabeçalho, conteúdo e alerta vêm do styles.scss; os campos, do app-branch-fields.
+:host {
+  display: block;
+}
+
+.branch-form {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}

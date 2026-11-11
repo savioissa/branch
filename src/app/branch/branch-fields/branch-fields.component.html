@@ -1,0 +1,52 @@
+@if (loading) {
+  <div class="form-grid" aria-hidden="true">
+    <div class="skeleton field-skeleton"></div>
+    <div class="skeleton field-skeleton"></div>
+  </div>
+} @else {
+  <div class="form-grid" [formGroup]="group">
+    <div class="form-field">
+      <label class="t-label-field form-field__label" for="branch-codigo">
+        Código <span class="form-field__required" aria-hidden="true">*</span>
+      </label>
+      <input
+        id="branch-codigo"
+        pInputText
+        class="ui-input form-field__input"
+        formControlName="codigo"
+        autocomplete="off"
+        [attr.maxlength]="maxLength"
+        aria-required="true"
+        [class.form-field__input--invalid]="invalido('codigo')"
+        [attr.aria-invalid]="invalido('codigo')"
+        [attr.aria-describedby]="invalido('codigo') ? 'branch-codigo-erro' : null"
+      />
+      @if (invalido('codigo')) {
+        <small id="branch-codigo-erro" class="form-field__error">
+          {{ group.controls.codigo.hasError('duplicado') ? 'Já existe uma filial com este código' : 'Informe o código' }}
+        </small>
+      }
+    </div>
+
+    <div class="form-field">
+      <label class="t-label-field form-field__label" for="branch-descricao">
+        Descrição <span class="form-field__required" aria-hidden="true">*</span>
+      </label>
+      <input
+        id="branch-descricao"
+        pInputText
+        class="ui-input form-field__input"
+        formControlName="descricao"
+        autocomplete="off"
+        [attr.maxlength]="maxLength"
+        aria-required="true"
+        [class.form-field__input--invalid]="invalido('descricao')"
+        [attr.aria-invalid]="invalido('descricao')"
+        [attr.aria-describedby]="invalido('descricao') ? 'branch-descricao-erro' : null"
+      />
+      @if (invalido('descricao')) {
+        <small id="branch-descricao-erro" class="form-field__error">Informe a descrição</small>
+      }
+    </div>
+  </div>
+}
