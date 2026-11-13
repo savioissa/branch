@@ -1,0 +1,62 @@
+// Seção de escolha (almoxarifado ou repositório) dentro da tela cinza de adicionar repositório: azul-clara,
+// como a seção de vinculação de almoxarifado.
+:host {
+  display: block;
+}
+
+.pick-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px 16px 16px;
+  background: #F6FAFF;
+  border: 1px solid #C6DFFF;
+  border-radius: 10px;
+}
+
+.pick-section__header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.pick-section__title {
+  margin: 0;
+  font: var(--label-field);
+  color: #1F2937;
+}
+
+// repositório antes de escolher o almoxarifado
+.pick-section__title--closed {
+  color: #9CA3AF;
+}
+
+.pick-section__tools {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+// select do tipo de repositório, ao lado do título
+.pick-section__type {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pick-section__type-label {
+  font: var(--secondary-md);
+  color: #6B7280;
+}
+
+:host ::ng-deep .pick-section__type-select.p-dropdown {
+  width: 180px;
+  height: 32px;
+  align-items: center;
+
+  .p-dropdown-label {
+    padding: 0 10px;
+    font: var(--secondary-md);
+  }
+}

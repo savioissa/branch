@@ -1,0 +1,111 @@
+<section class="pick-section">
+  @if (closed) {
+    <!-- fechada até escolher o almoxarifado -->
+    <h3 class="pick-section__title pick-section__title--closed">Selecionar repositório</h3>
+  } @else if (selected && !alterando) {
+    <header class="pick-section__header">
+      <h3 class="pick-section__title">Repositório</h3>
+      <div class="pick-section__tools">
+        <p-button label="Alterar" [text]="true" styleClass="btn--md" (onClick)="alterando = true" />
+        <p-button label="Remover" [text]="true" styleClass="btn--md btn--danger btn--text" (onClick)="escolher(null)" />
+      </div>
+    </header>
+    <app-branch-repository-card [repository]="selected" (open)="abrir($event)" />
+  } @else {
+    <header class="pick-section__header">
+      <h3 class="pick-section__title">Selecionar repositório</h3>
+
+      <div class="pick-section__type">
+        <label class="pick-section__type-label" for="repository-picker-type">Tipo repositório</label>
+        <p-dropdown
+          [options]="tipos"
+          optionLabel="label"
+          optionValue="value"
+          [ngModel]="tipo"
+          (ngModelChange)="onTipoChange($event)"
+          inputId="repository-picker-type"
+          appendTo="body"
+          styleClass="pick-section__type-select"
+        />
+      </div>
+
+      <div class="pick-section__tools">
+        <p-button
+          [class.is-active]="showFilter"
+          icon="pi pi-filter"
+          styleClass="btn--md btn--neutral"
+          (onClick)="showFilter = !showFilter"
+        />
+        <p-button
+          icon="pi pi-refresh"
+          styleClass="btn--md btn--neutral"
+          [disabled]="status === 'loading'"
+          (onClick)="carregar()"
+        />
+      </div>
+    </header>
+
+    @if (showFilter) {
+      <app-branch-repository-filter
+        idPrefix="repository-picker-filter"
+        [tipo]="tipo"
+        [filter]="filtro"
+        (filterChange)="onFilterChange($event)"
+      />
+    }
+
+    @switch (status) {
+      @case ('loading') {
+        <div class="list-stack" aria-busy="true">
+          @for (s of skeletons; track $index) {
+            <app-branch-repository-card [loading]="true" />
+          }
+        </div>
+      }
+
+      @case ('error') {
+        <div class="load-state load-state--error">
+          <i class="pi pi-exclamation-circle"></i>
+          <p>Não foi possível carregar os repositórios</p>
+          <p-button label="Tentar novamente" icon="pi pi-refresh" styleClass="btn--md btn--secondary" (onClick)="carregar()" />
+        </div>
+      }
+
+      @default {
+        @if (resultado.length) {
+          <div class="list-stack">
+            @for (repository of pagina; track key(repository)) {
+              <app-branch-repository-card
+                [repository]="repository"
+                [pickable]="true"
+                (pick)="escolher($event)"
+                (open)="abrir($event)"
+              />
+            }
+          </div>
+
+          @if (resultado.length > rows) {
+            <p-paginator
+              [first]="first"
+              [rows]="rows"
+              [totalRecords]="resultado.length"
+              [pageLinkSize]="5"
+              styleClass="paginator--md"
+              (onPageChange)="onPage($event)"
+            />
+          }
+        } @else if (repositorios.length && filtroAtivo) {
+          <div class="load-state">
+            <i class="pi pi-search"></i>
+            <p>Nenhum resultado encontrado</p>
+          </div>
+        } @else {
+          <div class="load-state">
+            <i class="pi pi-folder-open"></i>
+            <p>Nenhum repositório deste tipo cadastrado</p>
+          </div>
+        }
+      }
+    }
+  }
+</section>

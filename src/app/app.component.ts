@@ -7,8 +7,7 @@ import { ToastModule } from 'primeng/toast';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, ToastModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
   constructor(private primengConfig: PrimeNGConfig) {}

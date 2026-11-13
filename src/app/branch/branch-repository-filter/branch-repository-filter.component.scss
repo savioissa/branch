@@ -1,0 +1,20 @@
+// O visual do painel vem do styles.css global (.filter-panel*).
+:host {
+  display: block;
+}
+
+// 4 colunas (grade padrão do .filter-panel), em fluxo normal: Tipo repositório + 10 campos (4 + 4 + 3).
+// Com tipo fixo, só os 2 campos do tipo, na 1ª linha.
+
+@media (max-width: 1100px) {
+  // telas médias: 2 colunas
+  .repo-filter {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .repo-filter {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

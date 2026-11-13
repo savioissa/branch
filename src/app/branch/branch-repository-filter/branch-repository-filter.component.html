@@ -1,0 +1,76 @@
+<section class="filter-panel repo-filter">
+  @if (!tipo) {
+    <div class="filter-panel__field">
+      <label class="filter-panel__label" [for]="idPrefix + '-tipo'">Tipo repositório</label>
+      <div class="filter-panel__control">
+        <p-multiSelect
+          [options]="tipos"
+          optionLabel="label"
+          optionValue="value"
+          [ngModel]="filter.tipos"
+          (ngModelChange)="setTipos($event)"
+          [inputId]="idPrefix + '-tipo'"
+          placeholder="Todos"
+          [showHeader]="false"
+          appendTo="body"
+          styleClass="filter-panel__multi"
+          panelStyleClass="filter-panel__multi-panel"
+        />
+      </div>
+    </div>
+  }
+
+  <!-- grade de 4 colunas em fluxo normal; campos desabilitados quando o Tipo repositório exclui o tipo -->
+  @for (g of grupos; track g.tipo) {
+    <div
+      class="filter-panel__field"
+      [class.filter-panel__field--disabled]="!habilitado(g.tipo)"
+    >
+      <label class="filter-panel__label" [for]="idPrefix + '-' + g.tipo + '-codigo'">{{ g.codigo }}</label>
+      <div class="filter-panel__control">
+        <p-dropdown
+          [options]="operadores"
+          [ngModel]="filter.campos[g.tipo].codigo.operador"
+          (ngModelChange)="update(g.tipo, 'codigo', { operador: $event })"
+          [disabled]="!habilitado(g.tipo)"
+          placeholder="Operador"
+          appendTo="body"
+          styleClass="filter-panel__operator"
+          panelStyleClass="filter-panel__operator-panel"
+        />
+        <input
+          [id]="idPrefix + '-' + g.tipo + '-codigo'"
+          pInputText
+          class="filter-panel__input"
+          [ngModel]="filter.campos[g.tipo].codigo.valor"
+          (ngModelChange)="update(g.tipo, 'codigo', { valor: $event })"
+          [disabled]="!habilitado(g.tipo)"
+        />
+      </div>
+    </div>
+
+    <div class="filter-panel__field" [class.filter-panel__field--disabled]="!habilitado(g.tipo)">
+      <label class="filter-panel__label" [for]="idPrefix + '-' + g.tipo + '-nome'">{{ g.nome }}</label>
+      <div class="filter-panel__control">
+        <p-dropdown
+          [options]="operadores"
+          [ngModel]="filter.campos[g.tipo].nome.operador"
+          (ngModelChange)="update(g.tipo, 'nome', { operador: $event })"
+          [disabled]="!habilitado(g.tipo)"
+          placeholder="Operador"
+          appendTo="body"
+          styleClass="filter-panel__operator"
+          panelStyleClass="filter-panel__operator-panel"
+        />
+        <input
+          [id]="idPrefix + '-' + g.tipo + '-nome'"
+          pInputText
+          class="filter-panel__input"
+          [ngModel]="filter.campos[g.tipo].nome.valor"
+          (ngModelChange)="update(g.tipo, 'nome', { valor: $event })"
+          [disabled]="!habilitado(g.tipo)"
+        />
+      </div>
+    </div>
+  }
+</section>

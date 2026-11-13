@@ -1,0 +1,21 @@
+// O painel usa .insumo-layer do styles.css (fundo cinza, borda, cantos, respiro); aqui só o cabeçalho.
+:host {
+  display: block;
+}
+
+.add-panel__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.add-panel__title {
+  margin: 0;
+  color: #1F2937;
+}
+
+.add-panel__actions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}

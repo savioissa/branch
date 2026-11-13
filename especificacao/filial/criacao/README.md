@@ -1,36 +1,38 @@
----
-pasta: criacao
-objeto: filial
----
-# Filial — criacao
+# Filial — criação
 
-Nome da pasta adotado sem confirmação.
+### Propósito
+Página de cadastro de uma nova filial (rota `/filial/nova`). Permite ao usuário informar Código
+e Descrição, salvar a filial e seguir para a home dela, ou desistir e voltar à lista.
 
-## Propósito
-Cadastrar uma filial nova.
+### Componentização
+| Componente          | Tipo    | Papel na página                                                        |
+| ------------------- | ------- | ---------------------------------------------------------------------- |
+| `app-branch-form`   | Interno | Contêiner da página: cabeçalho, salvar, cancelar e confirmação de saída. |
+| `app-branch-fields` | Interno | Campos Código e Descrição, com validação.                              |
+| `p-confirmDialog`   | Externo | Confirmação de saída com dados preenchidos.                            |
+| `p-button`          | Externo | Cancelar e Salvar.                                                     |
+| `p-toast`           | Externo | Toasts de sucesso e erro (global).                                     |
 
-## Composição
-- app-branch-form — contêiner da página: cabeçalho, salvar, cancelar e confirmação de saída
-  - app-branch-fields — campos Código e Descrição com validação
-  - p-confirmDialog (externo)
-  - p-button (externo)
-  - p-toast (externo, global)
+### Layout
+A página é uma coluna com a largura toda, dividida em duas seções:
 
-## Layout da página
-Rota `/filial/nova`. Uma coluna com a largura toda:
+1. **Cabeçalho (topo, fixo ao rolar):** título à esquerda; Cancelar e Salvar à direita
+   (`app-branch-form`).
+2. **Conteúdo:** `app-branch-fields`, com Código e Descrição lado a lado (um abaixo do outro
+   até 700px).
 
-1. Cabeçalho fixo ao rolar: título `[[iclass.generic.label.new-branch]]` à esquerda; Cancelar e Salvar à direita.
-2. Campos Código e Descrição lado a lado (um abaixo do outro até 700px).
+### Fluxo entre os componentes
+- **Dado** o formulário aberto, **quando** o usuário preenche os campos em
+  `app-branch-fields`, **então** `app-branch-form` habilita "Salvar" assim que os dois ficam
+  válidos.
+- **Dado** o formulário válido, **quando** o usuário salva em `app-branch-form` e o código já
+  existe, **então** `app-branch-fields` mostra a mensagem de código duplicado no Código.
+- **Dado** a criação concluída, **quando** `app-branch-form` recebe o sucesso, **então** o
+  toast de sucesso aparece e a home da filial criada abre (`/filial/:codigo`; ver
+  `../home/README.md`), substituindo a criação no histórico (o Voltar do navegador não reabre o
+  formulário).
+- **Dado** o modal de saída aberto, **quando** o usuário clica em "Sair", **então** a lista de
+  filiais abre (`/filial`; ver `../lista/README.md`).
 
-## Fluxos entre componentes
-Dado o formulário aberto, quando o usuário preenche os campos em `app-branch-fields`, então `app-branch-form` habilita o Salvar assim que os dois ficam válidos.
-
-Dado o formulário válido, quando o usuário salva em `app-branch-form` e o código já existe, então `app-branch-fields` mostra "Já existe uma filial com este código" no Código.
-
-Dado a criação concluída, quando `app-branch-form` recebe o sucesso, então o toast global aparece e a home da filial criada abre (`../home/README.md`).
-
-## Referências visuais
-| Arquivo | Mostra |
-|---|---|
-| print 5 (fornecido pelo usuário, não copiado) | Nova Filial com campos vazios e Salvar desabilitado |
-| PDF 1 "Especificação - Cadastro de Filial" | Regras de cabeçalho, modal, toasts, limites e tags |
+### Referências visuais
+— (não se aplica)

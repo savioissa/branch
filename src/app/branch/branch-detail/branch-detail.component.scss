@@ -1,4 +1,4 @@
-// Página da filial em grid de 10 colunas: resumo (app-branch-summary) em 2, abas em 8.
+// Página da filial em grid de 10 colunas: resumo (app-branch-sidebar) em 2, abas em 8.
 // Os skeletons ficam em cada componente; aqui só o layout.
 :host {
   display: grid;
@@ -10,7 +10,7 @@
   box-sizing: border-box;
 }
 
-app-branch-summary {
+app-branch-sidebar {
   grid-column: span 2;
 }
 
@@ -27,21 +27,9 @@ app-branch-summary {
   align-self: stretch;
 }
 
-.tab-body {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.tab-toolbar {
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-}
-
 // telas estreitas: resumo em cima, abas embaixo, os dois com a largura toda
 @media (max-width: 900px) {
-  app-branch-summary,
+  app-branch-sidebar,
   .branch-main {
     grid-column: 1 / -1;
   }

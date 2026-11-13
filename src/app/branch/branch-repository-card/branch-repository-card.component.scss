@@ -1,0 +1,33 @@
+// O visual do card vem do styles.css global (.reg-card, .kv, .skeleton); aqui só as colunas e o skeleton.
+:host {
+  display: block;
+}
+
+.repository-card {
+  grid-template-columns: 140px 220px minmax(0, 1fr) auto;
+  min-height: 52px;
+  padding: 6px 12px 6px 20px;
+}
+
+// vínculo: Almoxarifado | Tipo | Código | Nome | ações, na mesma linha
+.repository-card--link {
+  grid-template-columns: minmax(0, 1fr) 120px 180px minmax(0, 1fr) auto;
+}
+
+// carregando: o card inteiro vira um bloco, com a mesma altura e cantos do card real
+.card-skeleton {
+  height: 52px;
+  border-radius: 10px;
+}
+
+@media (max-width: 700px) {
+  .repository-card {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr) minmax(0, 1fr) auto;
+    column-gap: 10px;
+    padding-left: 12px;
+  }
+
+  .repository-card--link {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
+  }
+}

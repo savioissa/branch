@@ -1,0 +1,90 @@
+<section class="insumo-layer link-panel" aria-labelledby="stock-partition-link-title">
+  <header class="link-panel__header">
+    <h2 id="stock-partition-link-title" class="t-title-sm link-panel__title">Selecionar almoxarifado</h2>
+
+    <div class="link-panel__actions">
+      <p-button label="Fechar" styleClass="btn--md btn--neutral" [disabled]="linking" (onClick)="closed.emit()" />
+      <p-button
+        [label]="'Vincular (' + selecionados.size + ')'"
+        styleClass="btn--md btn--primary"
+        [disabled]="!selecionados.size"
+        [loading]="linking"
+        (onClick)="vincular()"
+      />
+    </div>
+  </header>
+
+  <div class="link-panel__tools">
+    <p-button
+      [class.is-active]="showFilter"
+      icon="pi pi-filter"
+      styleClass="btn--md btn--neutral"
+      (onClick)="showFilter = !showFilter"
+    />
+    <p-button
+      icon="pi pi-refresh"
+      styleClass="btn--md btn--neutral"
+      [disabled]="status === 'loading'"
+      (onClick)="carregar()"
+    />
+  </div>
+
+  @if (showFilter) {
+    <app-branch-filter [filter]="filtro" (filterChange)="onFilterChange($event)" />
+  }
+
+  @switch (status) {
+    @case ('loading') {
+      <div class="list-stack" aria-busy="true">
+        @for (s of skeletons; track $index) {
+          <app-branch-stock-partition-card [loading]="true" />
+        }
+      </div>
+    }
+
+    @case ('error') {
+      <div class="load-state load-state--error">
+        <i class="pi pi-exclamation-circle"></i>
+        <p>Não foi possível carregar os almoxarifados</p>
+        <p-button label="Tentar novamente" icon="pi pi-refresh" styleClass="btn--md btn--secondary" (onClick)="carregar()" />
+      </div>
+    }
+
+    @default {
+      @if (resultado.length) {
+        <div class="list-stack">
+          @for (stockPartition of pagina; track stockPartition.codigo) {
+            <app-branch-stock-partition-card
+              [stockPartition]="stockPartition"
+              [selectable]="true"
+              [selected]="selecionados.has(stockPartition.codigo)"
+              (selectedChange)="alternar(stockPartition, $event)"
+              (open)="abrir($event)"
+            />
+          }
+        </div>
+
+        @if (resultado.length > rows) {
+          <p-paginator
+            [first]="first"
+            [rows]="rows"
+            [totalRecords]="resultado.length"
+            [pageLinkSize]="5"
+            styleClass="paginator--md"
+            (onPageChange)="onPage($event)"
+          />
+        }
+      } @else if (disponiveis.length && filtroAtivo) {
+        <div class="load-state">
+          <i class="pi pi-search"></i>
+          <p>Nenhum resultado encontrado</p>
+        </div>
+      } @else {
+        <div class="load-state">
+          <i class="pi pi-folder-open"></i>
+          <p>Todos os almoxarifados já estão vinculados a esta filial</p>
+        </div>
+      }
+    }
+  }
+</section>

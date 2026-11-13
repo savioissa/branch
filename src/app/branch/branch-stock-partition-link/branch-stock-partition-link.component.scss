@@ -1,0 +1,33 @@
+// O painel usa .insumo-layer do styles.css (respiro, borda, cantos), com fundo e borda azul-claros de .link-panel; aqui só cabeçalho e ferramentas.
+:host {
+  display: block;
+}
+
+// seção de vinculação (almoxarifado e repositório): fundo e borda azul-claro
+.link-panel {
+  background: #F6FAFF;
+  border-color: #C6DFFF;
+}
+
+.link-panel__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.link-panel__title {
+  margin: 0;
+  color: #1F2937;
+}
+
+.link-panel__actions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.link-panel__tools {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}

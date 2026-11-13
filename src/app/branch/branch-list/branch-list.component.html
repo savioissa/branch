@@ -7,7 +7,6 @@
     <p-button
       [class.is-active]="showFilter"
       icon="pi pi-filter"
-      ariaLabel="Filtrar"
       styleClass="btn--md btn--neutral header-btn"
       (onClick)="showFilter = !showFilter"
     />
@@ -15,7 +14,6 @@
     <p-button
       [class.is-active]="showSort"
       icon="pi pi-sort-amount-down"
-      ariaLabel="Ordenar"
       styleClass="btn--md btn--neutral header-btn"
       (onClick)="showSort = !showSort"
     />
@@ -41,7 +39,7 @@
 
   @switch (status) {
     @case ('loading') {
-      <div class="list-stack" aria-busy="true" aria-label="Carregando filiais">
+      <div class="list-stack" aria-busy="true">
         @for (s of skeletons; track $index) {
           <app-branch-card [loading]="true" />
         }

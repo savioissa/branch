@@ -17,55 +17,25 @@
 
   <!-- carregando ou pronto: cada componente mostra o próprio skeleton enquanto `loading` -->
   @default {
-    <app-branch-summary [branch]="branch" [loading]="status === 'loading'" />
+    <app-branch-sidebar [branch]="branch" [loading]="status === 'loading'" />
 
     <section class="branch-main" [attr.aria-busy]="status === 'loading'">
       <p-tabView styleClass="req-tabs branch-tabs" [(activeIndex)]="activeTab">
         <p-tabPanel header="Cadastro">
-          <form [formGroup]="form" (ngSubmit)="salvar()" class="tab-body" novalidate>
-            <div class="tab-toolbar">
-              @if (editing) {
-                <p-button
-                  label="Cancelar"
-                  type="button"
-                  styleClass="btn--md btn--neutral"
-                  [disabled]="saving"
-                  (onClick)="cancelar()"
-                />
-                <p-button
-                  label="Salvar"
-                  type="submit"
-                  styleClass="btn--md btn--primary"
-                  [disabled]="form.invalid || form.pristine"
-                  [loading]="saving"
-                />
-              } @else {
-                <p-button
-                  label="Editar"
-                  icon="pi pi-pencil"
-                  type="button"
-                  styleClass="btn--md btn--primary"
-                  [disabled]="status === 'loading'"
-                  (onClick)="editar()"
-                />
-              }
-            </div>
-
-            @if (erroGeral) {
-              <div class="form-alert" role="alert">
-                <i class="pi pi-exclamation-circle"></i>
-                <span>{{ erroGeral }}</span>
-              </div>
-            }
-
-            <app-branch-fields [group]="form" [loading]="status === 'loading'" />
-          </form>
+          <app-branch-register [branch]="branch" [loading]="status === 'loading'" (saved)="onSaved($event)" />
         </p-tabPanel>
 
         <p-tabPanel header="Almoxarifado">
           <!-- conteúdo lazy: só carrega os almoxarifados quando a aba é aberta (e mantém ao trocar de aba) -->
           <ng-template pTemplate="content">
-            <app-branch-warehouses [branchCode]="branch?.codigo ?? null" />
+            <app-branch-stock-partitions [branchCode]="branch?.codigo ?? null" />
+          </ng-template>
+        </p-tabPanel>
+
+        <p-tabPanel header="Repositório">
+          <!-- conteúdo lazy, como na aba Almoxarifado -->
+          <ng-template pTemplate="content">
+            <app-branch-repositories [branchCode]="branch?.codigo ?? null" />
           </ng-template>
         </p-tabPanel>
       </p-tabView>

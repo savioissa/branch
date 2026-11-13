@@ -1,0 +1,45 @@
+@if (loading || !stockPartition) {
+  <div class="skeleton card-skeleton" aria-hidden="true"></div>
+} @else {
+  <article
+    class="reg-card stock-partition-card"
+    [class.stock-partition-card--selectable]="selectable"
+    [class.stock-partition-card--selected]="selectable && selected"
+  >
+    @if (selectable) {
+      <p-checkbox
+        [binary]="true"
+        [ngModel]="selected"
+        (ngModelChange)="selectedChange.emit($event)"
+        [inputId]="'stock-partition-select-' + stockPartition.codigo"
+      />
+    }
+    <div class="kv">
+      <span class="kv-k">Código</span>
+      <span class="kv-v" [title]="stockPartition.codigo">{{ stockPartition.codigo }}</span>
+    </div>
+    <div class="kv">
+      <span class="kv-k">Descrição</span>
+      <span class="kv-v" [title]="stockPartition.descricao">{{ stockPartition.descricao }}</span>
+    </div>
+    <div class="card-actions">
+      @if (unlinkable) {
+        <p-button
+          icon="pi pi-link-slash"
+          [text]="true"
+          styleClass="btn--md btn--danger btn--text"
+          (onClick)="unlink.emit(stockPartition)"
+        />
+      }
+      @if (pickable) {
+        <p-button label="Selecionar" styleClass="btn--md btn--primary card-actions__pick" (onClick)="pick.emit(stockPartition)" />
+      }
+      <p-button
+        icon="pi pi-window-maximize"
+        [text]="true"
+        styleClass="btn--md btn--text icon-neutral"
+        (onClick)="open.emit(stockPartition)"
+      />
+    </div>
+  </article>
+}

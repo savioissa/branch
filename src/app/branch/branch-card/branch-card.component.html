@@ -11,9 +11,8 @@
       <span class="kv-v" [title]="branch.descricao">{{ branch.descricao }}</span>
     </div>
     <p-button
-      icon="pi pi-external-link"
+      icon="pi pi-window-maximize"
       [text]="true"
-      ariaLabel="Abrir filial {{ branch.descricao }}"
       styleClass="btn--md btn--text icon-neutral"
       (onClick)="open.emit(branch)"
     />

@@ -1,0 +1,16 @@
+// Aba Cadastro: barra de ações à direita, alerta e campos (os campos vêm do app-branch-fields).
+:host {
+  display: block;
+}
+
+.tab-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tab-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}

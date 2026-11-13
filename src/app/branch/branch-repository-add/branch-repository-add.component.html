@@ -1,0 +1,22 @@
+<section class="insumo-layer add-panel" aria-labelledby="repository-add-title">
+  <header class="add-panel__header">
+    <h2 id="repository-add-title" class="t-title-sm add-panel__title">Adicionar repositório</h2>
+
+    <div class="add-panel__actions">
+      <p-button label="Cancelar" styleClass="btn--md btn--neutral" [disabled]="saving" (onClick)="closed.emit()" />
+      <p-button label="Salvar" styleClass="btn--md btn--primary" [disabled]="!podeSalvar" [loading]="saving" (onClick)="salvar()" />
+    </div>
+  </header>
+
+  <app-branch-stock-partition-picker [selected]="almoxarifado" (selectedChange)="onAlmoxarifado($event)" />
+
+  <!-- fechada até escolher o almoxarifado -->
+  <app-branch-repository-picker [closed]="!almoxarifado" [(selected)]="repositorio" />
+
+  @if (duplicado) {
+    <div class="form-alert">
+      <i class="pi pi-exclamation-circle"></i>
+      <span>Este repositório já está vinculado a este almoxarifado nesta filial</span>
+    </div>
+  }
+</section>

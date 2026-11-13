@@ -1,0 +1,38 @@
+<form [formGroup]="form" (ngSubmit)="salvar()" class="tab-body" novalidate>
+  <div class="tab-toolbar">
+    @if (editing) {
+      <p-button
+        label="Cancelar"
+        type="button"
+        styleClass="btn--md btn--neutral"
+        [disabled]="saving"
+        (onClick)="cancelar()"
+      />
+      <p-button
+        label="Salvar"
+        type="submit"
+        styleClass="btn--md btn--primary"
+        [disabled]="form.invalid || form.pristine"
+        [loading]="saving"
+      />
+    } @else {
+      <p-button
+        label="Editar"
+        icon="pi pi-pencil"
+        type="button"
+        styleClass="btn--md btn--primary"
+        [disabled]="loading"
+        (onClick)="editar()"
+      />
+    }
+  </div>
+
+  @if (erroGeral) {
+    <div class="form-alert" role="alert">
+      <i class="pi pi-exclamation-circle"></i>
+      <span>{{ erroGeral }}</span>
+    </div>
+  }
+
+  <app-branch-fields [group]="form" [loading]="loading" />
+</form>

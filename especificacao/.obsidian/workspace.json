@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_global/premissas.md",
+                "file": "filial/home/app-branch-stock-partition-link.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "premissas"
+              "title": "app-branch-stock-partition-link"
             }
           }
         ]
@@ -188,27 +188,43 @@
       "bases:Criar nova base": false
     }
   },
-  "active": "02d220c523cb38d7",
+  "active": "5ab6f8445b442d20",
   "lastOpenFiles": [
-    "filial/lista/app-branch-list/app-branch-list.md",
-    "_global/premissas.md.tmp.14207.6a17ab87dcfa",
-    "_global/premissas.md.tmp.14207.c50680654407",
-    "filial/lista/app-branch-filter/app-branch-filter.md",
-    "filial/lista/app-branch-card/app-branch-card.md",
-    "filial/traducoes.md",
-    "_global/premissas.md.tmp.14207.19191b3d96ee",
-    "filial/home/app-branch-summary/app-branch-summary.md",
-    "filial/home/app-branch-detail/app-branch-detail.md",
-    "filial/criacao/app-branch-form/app-branch-form.md",
-    "filial/criacao/app-branch-fields/app-branch-fields.md",
+    "filial/sed5AYEgN",
+    "filial/home/app-branch-repository-picker.md.tmp.22856.e7872ed3c197",
+    "filial/home/app-branch-repositories.md.tmp.22856.2a07b4dc157f",
+    "filial/home/app-branch-repository-add.md",
+    "filial/home/app-branch-repository-add.md.tmp.22856.bc663c0685c5",
+    "filial/home/app-branch-repository-picker.md",
+    "filial/home/app-branch-repository-picker.md.tmp.22856.c3024c79ef8b",
+    "filial/home/app-branch-stock-partition-picker.md",
+    "filial/home/app-branch-stock-partition-picker.md.tmp.22856.f0ad01c8dac5",
+    "filial/home/app-branch-repository-card.md.tmp.22856.97dfb53c6bd4",
+    "filial/home/app-branch-stock-partition-card.md",
+    "filial/home/app-branch-sidebar.md",
+    "filial/home/app-branch-repository-link.md",
+    "filial/home/app-branch-repository-card.md",
+    "filial/home/app-branch-detail.md",
     "_global/premissas.md",
-    "_global/premissas.md.tmp.14207.94584afc2af7",
-    "_global/premissas.md.tmp.14207.6967e9341fd4",
-    "_global/premissas.md.tmp.14207.ac335b29837b",
-    "_global/premissas.md.tmp.14207.c3ba1d5a5944",
-    "filial/README.md.tmp.14207.caaf0242ed21",
     "filial/README.md",
-    "filial/pendencias.md",
-    "filial/lista/app-branch-sort/app-branch-sort.md"
+    "filial/lista/app-branch-list.md",
+    "filial/lista/app-branch-filter.md",
+    "filial/lista/app-branch-card.md",
+    "filial/traducoes.md",
+    "filial/sedQCGbV7",
+    "filial/sedu64TAo",
+    "filial/lista/app-branch-sort.md",
+    "filial/home/app-branch-register.md",
+    "filial/home/app-branch-repository-sort.md",
+    "filial/home/app-branch-repository-filter.md",
+    "filial/home/app-branch-stock-partition-link.md",
+    "filial/home/sedQdnKGn",
+    "filial/sedlJwIUO",
+    "filial/css-global.md",
+    "filial/lista/README.md",
+    "filial/home/app-stock-partition-card.md",
+    "filial/home/app-stock-partition-link.md",
+    "filial/criacao/README.md",
+    "filial/criacao/app-branch-form.md"
   ]
 }

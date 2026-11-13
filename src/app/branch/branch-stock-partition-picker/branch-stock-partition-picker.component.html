@@ -1,0 +1,89 @@
+<section class="pick-section">
+  @if (selected && !alterando) {
+    <header class="pick-section__header">
+      <h3 class="pick-section__title">Almoxarifado</h3>
+      <div class="pick-section__tools">
+        <p-button label="Alterar" [text]="true" styleClass="btn--md" (onClick)="alterando = true" />
+        <p-button label="Remover" [text]="true" styleClass="btn--md btn--danger btn--text" (onClick)="escolher(null)" />
+      </div>
+    </header>
+    <app-branch-stock-partition-card [stockPartition]="selected" (open)="abrir($event)" />
+  } @else {
+    <header class="pick-section__header">
+      <h3 class="pick-section__title">Selecionar almoxarifado</h3>
+
+      <div class="pick-section__tools">
+        <p-button
+          [class.is-active]="showFilter"
+          icon="pi pi-filter"
+          styleClass="btn--md btn--neutral"
+          (onClick)="showFilter = !showFilter"
+        />
+        <p-button
+          icon="pi pi-refresh"
+          styleClass="btn--md btn--neutral"
+          [disabled]="status === 'loading'"
+          (onClick)="carregar()"
+        />
+      </div>
+    </header>
+
+    @if (showFilter) {
+      <app-branch-filter [filter]="filtro" (filterChange)="onFilterChange($event)" />
+    }
+
+    @switch (status) {
+      @case ('loading') {
+        <div class="list-stack" aria-busy="true">
+          @for (s of skeletons; track $index) {
+            <app-branch-stock-partition-card [loading]="true" />
+          }
+        </div>
+      }
+
+      @case ('error') {
+        <div class="load-state load-state--error">
+          <i class="pi pi-exclamation-circle"></i>
+          <p>Não foi possível carregar os almoxarifados</p>
+          <p-button label="Tentar novamente" icon="pi pi-refresh" styleClass="btn--md btn--secondary" (onClick)="carregar()" />
+        </div>
+      }
+
+      @default {
+        @if (resultado.length) {
+          <div class="list-stack">
+            @for (stockPartition of pagina; track stockPartition.codigo) {
+              <app-branch-stock-partition-card
+                [stockPartition]="stockPartition"
+                [pickable]="true"
+                (pick)="escolher($event)"
+                (open)="abrir($event)"
+              />
+            }
+          </div>
+
+          @if (resultado.length > rows) {
+            <p-paginator
+              [first]="first"
+              [rows]="rows"
+              [totalRecords]="resultado.length"
+              [pageLinkSize]="5"
+              styleClass="paginator--md"
+              (onPageChange)="onPage($event)"
+            />
+          }
+        } @else if (catalogo.length && filtroAtivo) {
+          <div class="load-state">
+            <i class="pi pi-search"></i>
+            <p>Nenhum resultado encontrado</p>
+          </div>
+        } @else {
+          <div class="load-state">
+            <i class="pi pi-folder-open"></i>
+            <p>Nenhum almoxarifado cadastrado</p>
+          </div>
+        }
+      }
+    }
+  }
+</section>
